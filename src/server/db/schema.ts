@@ -1,7 +1,7 @@
 // Example model schema from the Drizzle docs
 // https://orm.drizzle.team/docs/sql-schema-declaration
 
-import { sql } from "drizzle-orm";
+import { relations, sql } from "drizzle-orm";
 import {
   boolean, integer,
   pgTableCreator,
@@ -19,20 +19,21 @@ import {
 export const createTable = pgTableCreator((name) => `${name}`);
 
 export const voters = createTable("voters", {
-  id: serial("voter_id").notNull(),
+  id: serial("voter_id").notNull().primaryKey(),
   browserId: varchar("browser_id").notNull(),
   hasVoted: boolean("has-voted").notNull().default(false),
   createdLang: boolean("created-lang").notNull().default(false)
 })
 
 export const votes = createTable("votes", {
-  id: serial("id").notNull(),
-  voterId: integer("voter_id").notNull(),
-  langId: integer("lang_id").notNull(),
+  id: serial("id").notNull().primaryKey(),
+  voterId: integer("voter_id").notNull().references(()=> voters.id),
+  langId: integer("lang_id").notNull().references(()=> langs.id),
 })
 
 export const langs = createTable("langs", {
-  id: serial("lang_id").notNull(),
+  id: serial("lang_id").notNull().primaryKey(),
   name: text("lang_name").notNull(),
   description: text("lang_description").notNull(),
 })
+

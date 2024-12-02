@@ -1,0 +1,108 @@
+{
+  "id": "b5f156be-d7f8-4ade-bf43-edee8ad3e4cb",
+  "prevId": "00000000-0000-0000-0000-000000000000",
+  "version": "7",
+  "dialect": "postgresql",
+  "tables": {
+    "public.langs": {
+      "name": "langs",
+      "schema": "",
+      "columns": {
+        "lang_id": {
+          "name": "lang_id",
+          "type": "serial",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "lang_name": {
+          "name": "lang_name",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "lang_description": {
+          "name": "lang_description",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {},
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {}
+    },
+    "public.voters": {
+      "name": "voters",
+      "schema": "",
+      "columns": {
+        "voter_id": {
+          "name": "voter_id",
+          "type": "serial",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "browser_id": {
+          "name": "browser_id",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "has-voted": {
+          "name": "has-voted",
+          "type": "boolean",
+          "primaryKey": false,
+          "notNull": true,
+          "default": false
+        },
+        "created-lang": {
+          "name": "created-lang",
+          "type": "boolean",
+          "primaryKey": false,
+          "notNull": true,
+          "default": false
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {},
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {}
+    },
+    "public.votes": {
+      "name": "votes",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "serial",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "voter_id": {
+          "name": "voter_id",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "lang_id": {
+          "name": "lang_id",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {},
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {}
+    }
+  },
+  "enums": {},
+  "schemas": {},
+  "sequences": {},
+  "_meta": {
+    "columns": {},
+    "schemas": {},
+    "tables": {}
+  }
+}
