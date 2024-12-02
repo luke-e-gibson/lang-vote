@@ -4,14 +4,11 @@ import {
   cached_getLangs,
   cached_getUserNumber, cached_getVotesForLanguage
 } from "@/server/queries";
-import { Button } from "@/components/ui/button";
 import { LangCard } from "./_components/LangCard";
 import { AddLangDialog } from "@/app/_components/AddLangDialog";
 
 export default async function HomePage() {
-  const [langs] = await Promise.all([ cached_getLangs()]);
-  const [userVoted] = await Promise.all([cached_getUserNumber()])
-
+  const [langs, userVoted] = await Promise.all([ cached_getLangs(), cached_getUserNumber()] );
 
   return (
     <main className="mx-auto max-w-7xl rounded border py-5">
@@ -22,7 +19,7 @@ export default async function HomePage() {
         </div>
         <AddLangDialog/>
       </div>
-      <div className="grid grid-cols-4 gap-5 py-5">
+      <div className="grid grid-flow-row md:grid-flow-row grid-cols-4 gap-5">
         {langs.map(async (_lang) => {
           const votes = await cached_getVotesForLanguage(_lang.id)
           const lang = { ..._lang, langVotes: votes.length }
