@@ -1,5 +1,5 @@
 "use server";
-import { eq } from "drizzle-orm";
+import { asc, eq } from "drizzle-orm";
 import { db } from "./db";
 import * as schema from "./db/schema";
 import { unstable_cache } from "next/cache";
